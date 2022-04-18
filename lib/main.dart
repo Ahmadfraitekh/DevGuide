@@ -1,0 +1,30 @@
+import 'package:dev_guide/src/core/constants.dart';
+import 'package:dev_guide/src/core/route.dart';
+import 'package:dev_guide/src/presentation/resources/theme_manager.dart';
+//import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //await Firebase.initializeApp();
+  await SharedPreferences.getInstance();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: Constants.navigatorKey,
+      title: Constants.appName,
+      theme: getLightTheme(),
+      initialRoute: '/',
+      onGenerateRoute: Routes.generateRoute,
+    );
+  }
+}
