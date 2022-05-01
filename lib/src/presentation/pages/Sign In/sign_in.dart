@@ -3,6 +3,8 @@
 import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/core/helper/input_validation_mixin.dart';
 import 'package:dev_guide/src/core/routes_name.dart';
+import 'package:dev_guide/src/domain/viewmodel/auth_viewmodel/authentication.dart';
+
 import 'package:dev_guide/src/presentation/resources/assets_manager.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/font_manager.dart';
@@ -13,18 +15,14 @@ import 'package:dev_guide/src/presentation/widget/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SigninPage extends StatefulWidget {
-  const SigninPage({Key? key}) : super(key: key);
-
-  @override
-  State<SigninPage> createState() => _SigninPageState();
-}
-
-// ignore: duplicate_ignore
-class _SigninPageState extends State<SigninPage> with InputValidationMixin {
+// ignore: must_be_immutable
+class SigninPage extends StatelessWidget {
+  SigninPage({Key? key}) : super(key: key);
   late ThemeData _theme;
 
   String _email = "", _password = "";
+  var _emailController = TextEditingController();
+  var _passwordController = TextEditingController();
   late double _width, _pixelRatio;
 
   //late bool _xLarge;
@@ -81,37 +79,41 @@ class _SigninPageState extends State<SigninPage> with InputValidationMixin {
                       icon: Icons.email,
                       inputType: TextInputType.emailAddress,
                       validator: (email) {
-                        if (isEmailValid(email)) {
+                        if (InputValidationMixin.isEmailValid(email)) {
                           return null;
-                        } else if (isEmpty(email)) {
+                        } else if (InputValidationMixin.isEmpty(email)) {
                           return Constants.emailRequired;
-                        } else if (!isEmailValid(email)) {
+                        } else if (!InputValidationMixin.isEmpty(email)) {
                           return Constants.invalidEmail;
                         }
                       },
+                      onSave: (value) {
+                        Authentication.instance.email = value;
+                      },
+                      controller: _emailController,
                     ),
                     RoundedPasswordField(
                       onChange: (value) => _password = value,
                       icon: Icons.lock,
                       hintText: Constants.password,
                       validator: (password) {
-                        if (!isEmpty(password)) {
+                        if (!InputValidationMixin.isEmpty(password)) {
                           return null;
                         } else {
                           return Constants.passwordRequired;
                         }
                       },
+                      onSave: (value) {
+                        Authentication.instance.password = value;
+                      },
                     ),
                     RoundeButton(
                       text: Constants.singIn,
-                      press: () {
+                      press: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            RoutesName.mainPage,
-                            (route) => false,
-                          );
+
+                          Authentication.instance.signInWithEmailAndPassword();
                         }
                       },
                       isLoading: false,
@@ -132,7 +134,7 @@ class _SigninPageState extends State<SigninPage> with InputValidationMixin {
                           width: AppSize.s12,
                         ),
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
                             Navigator.pushReplacementNamed(
                                 context, RoutesName.signup);
                           },
@@ -161,10 +163,13 @@ class _SigninPageState extends State<SigninPage> with InputValidationMixin {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(AppPadding.p14),
-                            child: Icon(
-                              FontAwesomeIcons.facebookF,
-                              color: ColorManager.secondary,
-                              size: AppSize.s20,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                FontAwesomeIcons.facebookF,
+                                color: ColorManager.secondary,
+                                size: AppSize.s20,
+                              ),
                             ),
                           ),
                         ),
@@ -178,10 +183,15 @@ class _SigninPageState extends State<SigninPage> with InputValidationMixin {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(AppPadding.p14),
-                            child: Icon(
-                              FontAwesomeIcons.google,
-                              color: ColorManager.secondary,
-                              size: AppSize.s20,
+                            child: GestureDetector(
+                              onTap: () {
+                                Authentication.instance.signInWithGoogle();
+                              },
+                              child: Icon(
+                                FontAwesomeIcons.google,
+                                color: ColorManager.secondary,
+                                size: AppSize.s20,
+                              ),
                             ),
                           ),
                         ),

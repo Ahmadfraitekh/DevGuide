@@ -1,8 +1,11 @@
+import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/font_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 
 class RoundeButton extends StatelessWidget {
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
   final String text;
   final VoidCallback press;
   final bool isLoading;
@@ -11,6 +14,8 @@ class RoundeButton extends StatelessWidget {
 
   const RoundeButton({
     Key? key,
+    this.emailController,
+    this.passwordController,
     required this.text,
     required this.press,
     required this.isLoading,
@@ -32,7 +37,9 @@ class RoundeButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.p12),
           child: isLoading
-              ? const CircularProgressIndicator()
+              ? CircularProgressIndicator(
+                  color: ColorManager.secondary,
+                )
               : Text(
                   text,
                   style: TextStyle(

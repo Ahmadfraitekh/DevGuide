@@ -30,4 +30,11 @@ abstract class Constants {
 
   // Database References
   static const String userID = 'userId';
+  static const String userToken = 'userToken';
+
+  static const userName = 'userName';
+  static const userPhoto = 'userPhoto';
+  static const userEmail = 'userEmail';
+  static const userPhone = 'userPhone';
+  static const loginBySocialMedia = 'loginBySocialMedia';
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dev_guide/src/core/routes_name.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
@@ -177,6 +175,7 @@ class _HomePageState extends State<HomePage>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Card(
+          color: ColorManager.scaffoldBackgroundColor,
           clipBehavior: Clip.antiAlias,
           elevation: 10.0,
           shadowColor: ColorManager.secondary,

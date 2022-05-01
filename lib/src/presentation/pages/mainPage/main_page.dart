@@ -1,50 +1,41 @@
+import 'package:dev_guide/src/core/routes_name.dart';
+import 'package:dev_guide/src/domain/viewmodel/main_viewmodel/main_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dev_guide/src/core/constants.dart';
 
-import 'package:dev_guide/src/presentation/pages/categoryPage/category.dart';
-import 'package:dev_guide/src/presentation/pages/favoritePage/favorite.dart';
-import 'package:dev_guide/src/presentation/pages/homePage/home.dart';
-import 'package:dev_guide/src/presentation/pages/searchPage/search.dart';
 import 'package:dev_guide/src/presentation/resources/assets_manager.dart';
 
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class MainPage extends GetWidget<MainViewModel> {
+  MainPage({Key? key}) : super(key: key);
 
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
   late ThemeData _theme;
-  int _pageIndex = 0;
-  late double _width;
 
-  late PageController _pageController;
+  late double _width;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<Widget> pages = [
-    const HomePage(),
-    const CategroyPage(),
-    const SearchPage(),
-    const FavoritePage(),
-  ];
+  var initial = MainViewModel.instance.onInit();
+  var close = MainViewModel.instance.onClose();
 
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: _pageIndex);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+  //   _pageController = PageController(initialPage: _pageIndex);
+  // }
+
+  // @override
+  // void dispose() {
+  //   _pageController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -90,74 +81,78 @@ class _MainPageState extends State<MainPage> {
                 horizontal: AppPadding.p8,
                 vertical: AppPadding.p8,
               ),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.account_circle,
-                  size: AppSize.s40,
-                  color: ColorManager.white,
+              child: CircleAvatar(
+                backgroundColor: ColorManager.white,
+                radius: 29.0,
+                child: CircleAvatar(
+                  radius: 30.0,
+                  backgroundColor: ColorManager.secondary,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RoutesName.profile);
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.solidUser,
+                      size: AppSize.s25,
+                      color: ColorManager.white,
+                    ),
+                  ),
                 ),
               ),
             ),
           ],
         ),
         body: PageView(
-          children: pages,
-          onPageChanged: onPageChange,
-          controller: _pageController,
+          children: MainViewModel.instance.pages,
+          onPageChanged: (page) => MainViewModel.instance.onPageChange(page),
+          controller: MainViewModel.instance.pageController,
         ),
         bottomNavigationBar: _bottomNavigatonBar(),
       ),
     );
   }
 
-  /// [page] current page
-  //When page is Changed
-  void onPageChange(int page) {
-    setState(() {
-      _pageIndex = page;
-    });
-  }
-
-  /// [index] current page index
-  void onTabTapped(int index) {
-    _pageController.jumpToPage(index);
-  }
+  // void onPageChange(int page) {
+  //   MainViewModel.instance.pageIndex = page;
+  // }
 
   Widget _bottomNavigatonBar() {
-    return BottomNavigationBar(
-      currentIndex: _pageIndex,
-      type: BottomNavigationBarType.fixed,
-      onTap: onTabTapped,
-      showUnselectedLabels: true,
-      selectedItemColor: ColorManager.white,
-      unselectedItemColor: ColorManager.grey2.withOpacity(0.7),
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home,
+    return GetBuilder<MainViewModel>(
+      init: MainViewModel(),
+      builder: (controller) => BottomNavigationBar(
+        currentIndex: MainViewModel.instance.pageIndex,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) => MainViewModel.instance.onTabTapped(index),
+        showUnselectedLabels: true,
+        selectedItemColor: ColorManager.white,
+        unselectedItemColor: ColorManager.grey2.withOpacity(0.7),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Home',
           ),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.dashboard,
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.dashboard,
+            ),
+            label: 'Category',
           ),
-          label: 'Category',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.search,
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+            ),
+            label: 'Search',
           ),
-          label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.favorite,
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite,
+            ),
+            label: 'Favorite',
           ),
-          label: 'Favorite',
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

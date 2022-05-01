@@ -1,9 +1,11 @@
 import 'package:dev_guide/src/core/routes_name.dart';
+
 import 'package:dev_guide/src/presentation/pages/Sign%20In/sign_in.dart';
 import 'package:dev_guide/src/presentation/pages/Sign%20Up/sign_up.dart';
 import 'package:dev_guide/src/presentation/pages/coursePage/course.dart';
 import 'package:dev_guide/src/presentation/pages/coursesPage/courses.dart';
 import 'package:dev_guide/src/presentation/pages/mainPage/main_page.dart';
+import 'package:dev_guide/src/presentation/pages/profilePage/profile.dart';
 import 'package:dev_guide/src/presentation/pages/splash/splash.dart';
 import 'package:dev_guide/src/presentation/pages/subCategoryPage/sub_category.dart';
 import 'package:dev_guide/src/presentation/pages/webView/web_view.dart';
@@ -29,22 +31,22 @@ class Routes {
       case RoutesName.splash:
         return PageRouteBuilder<dynamic>(
           pageBuilder: (context, Animation<double> a1, Animation<double> a2) =>
-              const SplashPage(),
+              SplashPage(),
         );
       case RoutesName.signin:
         return PageRouteBuilder<dynamic>(
           pageBuilder: (context, Animation<double> a1, Animation<double> a2) =>
-              const SigninPage(),
+              SigninPage(),
         );
       case RoutesName.signup:
         return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
-              const SignUpPage(),
+              SignUpPage(),
         );
       case RoutesName.mainPage:
         return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
-              const MainPage(),
+              MainPage(),
         );
       case RoutesName.subCategory:
         final args = settings.arguments as Map;
@@ -78,11 +80,16 @@ class Routes {
             link: args["link"],
           ),
         );
+      case RoutesName.profile:
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
+              ProfilePage(),
+        );
 
       default:
         return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
-              const MainPage(),
+              MainPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return transitionBuilder(
                 context, animation, secondaryAnimation, child);

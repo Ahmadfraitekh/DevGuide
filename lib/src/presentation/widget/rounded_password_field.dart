@@ -5,17 +5,22 @@ import 'package:dev_guide/src/presentation/widget/text_field_container.dart';
 import 'package:flutter/material.dart';
 
 class RoundedPasswordField extends StatefulWidget {
-  final ValueChanged<String> onChange;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChange;
   final String? hintText;
   final IconData icon;
+
   final dynamic validator;
+  final Function(String? val)? onSave;
 
   const RoundedPasswordField({
     Key? key,
-    required this.onChange,
+    this.onChange,
     this.hintText,
     required this.icon,
     this.validator,
+    this.controller,
+    this.onSave,
   }) : super(key: key);
 
   @override
@@ -37,6 +42,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
           obscureText: _showPassword ? false : true,
           onChanged: widget.onChange,
           cursorColor: _theme.primaryColor,
+          onSaved: widget.onSave,
           validator: widget.validator,
           style: const TextStyle(
             color: Colors.black,

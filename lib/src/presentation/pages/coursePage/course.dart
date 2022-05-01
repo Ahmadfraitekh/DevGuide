@@ -23,37 +23,35 @@ class _CoursePageState extends State<CoursePage>
     _theme = Theme.of(context);
     _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: AppSize.s16,
-                ),
-                Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(AppPadding.p8),
-                      child: BackIcon(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: AppSize.s16,
+              ),
+              Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(AppPadding.p8),
+                    child: BackIcon(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(AppPadding.p12),
+                    child: Text(
+                      widget.courses["name"],
+                      style: _theme.textTheme.labelMedium,
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(AppPadding.p12),
-                      child: Text(
-                        widget.courses["name"],
-                        style: _theme.textTheme.labelMedium,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: AppSize.s28,
-                ),
-                _courseDetails(),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: AppSize.s28,
+              ),
+              _courseDetails(),
+            ],
           ),
         ),
       ),

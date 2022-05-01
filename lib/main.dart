@@ -1,16 +1,20 @@
 import 'package:dev_guide/src/core/constants.dart';
+import 'package:dev_guide/src/core/helper/binding.dart';
 import 'package:dev_guide/src/core/route.dart';
+
 import 'package:dev_guide/src/presentation/resources/theme_manager.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //await Firebase.initializeApp();
+  await Firebase.initializeApp();
   await SharedPreferences.getInstance();
-  runApp(const MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialBinding: Binding(),
       navigatorKey: Constants.navigatorKey,
       title: Constants.appName,
       theme: getLightTheme(),

@@ -5,6 +5,7 @@ import 'package:dev_guide/src/presentation/widget/text_field_container.dart';
 import 'package:flutter/material.dart';
 
 class RoundedInputField extends StatelessWidget {
+  final TextEditingController controller;
   final String? hintText;
   final String? helperText;
   final String? valueText;
@@ -14,6 +15,7 @@ class RoundedInputField extends StatelessWidget {
   final IconData icon;
   final TextInputAction? textInputAction;
   final dynamic validator;
+  final Function(String? val)? onSave;
   final ValueChanged<String>? onChange;
   final VoidCallback? onTap;
 
@@ -29,7 +31,9 @@ class RoundedInputField extends StatelessWidget {
     this.validator,
     this.onChange,
     this.onTap,
+    required this.controller,
     required this.icon,
+    this.onSave,
   }) : super(key: key);
 
   @override
@@ -38,10 +42,12 @@ class RoundedInputField extends StatelessWidget {
       padding: const EdgeInsets.all(AppPadding.p8),
       child: TextFieldContainer(
         child: TextFormField(
+          controller: controller,
           textInputAction: textInputAction,
           onChanged: onChange,
           enabled: enabled,
           validator: validator,
+          onSaved: onSave,
           onTap: onTap,
           readOnly: onTap != null,
           maxLines: maxLines,
