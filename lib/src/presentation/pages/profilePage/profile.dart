@@ -233,10 +233,8 @@ class ProfilePage extends StatelessWidget {
           height: AppSize.s16,
         ),
         Center(
-          child: InkWell(
-            onTap: () async {
-              Authentication.instance.logOut();
-            },
+          child: GestureDetector(
+            onTap: () => Authentication.instance.logOut(),
             child: Text(
               'Sign out',
               style: TextStyle(

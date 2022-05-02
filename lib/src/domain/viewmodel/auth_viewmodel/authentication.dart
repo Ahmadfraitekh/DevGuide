@@ -16,9 +16,13 @@ class Authentication extends GetxController {
   late final GoogleSignInAccount googleAcc;
 
   String? email, password, fullName;
-
+  var isLoading = false.obs;
   @override
   void onInit() {
+    email = '';
+    password = '';
+    fullName = '';
+    isLoading.value = false;
     super.onInit();
   }
 
@@ -86,6 +90,7 @@ class Authentication extends GetxController {
   //Sign In with Email and Password without social authentication
   void signInWithEmailAndPassword() async {
     try {
+      isLoadingState();
       await _auth.signInWithEmailAndPassword(
         email: email!,
         password: password!,
@@ -105,6 +110,7 @@ class Authentication extends GetxController {
   // Sign Up with Email and Password without social authentication
   void signUpWithEmailAndPassword() async {
     try {
+      isLoadingState();
       await _auth
           .createUserWithEmailAndPassword(
             email: email!,
@@ -138,5 +144,11 @@ class Authentication extends GetxController {
         fullName: fullName == null ? user.user!.displayName : fullName,
       ),
     );
+  }
+
+  void isLoadingState() async {
+    isLoading.value = true;
+    await Future.delayed(Duration(seconds: 2));
+    isLoading.value = false;
   }
 }

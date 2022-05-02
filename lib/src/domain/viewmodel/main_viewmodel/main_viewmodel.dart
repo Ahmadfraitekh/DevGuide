@@ -10,7 +10,7 @@ class MainViewModel extends GetxController {
   int _pageIndex = 0;
   PageController? _pageController;
   List<Widget> _pages = [
-    const HomePage(),
+    HomePage(),
     const CategroyPage(),
     const SearchPage(),
     const FavoritePage(),

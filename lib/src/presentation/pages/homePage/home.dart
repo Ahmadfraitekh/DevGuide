@@ -1,37 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dev_guide/src/core/routes_name.dart';
+import 'package:dev_guide/src/domain/viewmodel/slider_viewmodel/slider_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
 import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin {
   // ignore: unused_field
   late double _width;
   late ThemeData _theme;
-  int activeIndex = 0;
-  final urlImages = [
-    'https://miro.medium.com/max/1400/0*E0oXyDylhIc78F2q',
-    'https://imgs.abduzeedo.com/files/wallpapers/wpw172/wp_1680.jpg',
-    'https://c4.wallpaperflare.com/wallpaper/962/970/355/code-web-development-development-html-wallpaper-preview.jpg',
-  ];
-
-  final List<String> textImages = [
-    'Find the book you need here ',
-    'Focusing is about saying NO.',
-    'Create a webpage using HTML',
-  ];
-
-  final String booksLink = 'https://books.goalkicker.com/';
 
   @override
   // ignore: must_call_super
@@ -183,19 +163,19 @@ class _HomePageState extends State<HomePage>
             height: AppSize.s190,
             width: 400.0,
             child: CarouselSlider.builder(
-              itemCount: urlImages.length,
+              itemCount: SliderViewModel.instance.urlImages.length,
               itemBuilder: (context, index, realIndex) {
-                final urlImage = urlImages[index];
+                final urlImage = SliderViewModel.instance.urlImages[index];
                 return _buildImage(urlImage, index);
               },
               options: CarouselOptions(
-                height: 400.0,
-                autoPlay: true,
-                viewportFraction: 1,
-                autoPlayInterval: Duration(seconds: 5),
-                onPageChanged: (index, reason) =>
-                    setState(() => activeIndex = index),
-              ),
+                  height: 400.0,
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  autoPlayInterval: Duration(seconds: 5),
+                  onPageChanged: (index, reason) {
+                    SliderViewModel.instance.activeIndex = index;
+                  }),
             ),
           ),
         ),
@@ -230,7 +210,7 @@ class _HomePageState extends State<HomePage>
               left: AppPadding.p20,
             ),
             child: Text(
-              '${textImages[index]}',
+              '${SliderViewModel.instance.textImages[index]}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: ColorManager.background,
@@ -245,8 +225,8 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildIndicator() {
     return AnimatedSmoothIndicator(
-      activeIndex: activeIndex,
-      count: urlImages.length,
+      activeIndex: SliderViewModel.instance.activeIndex,
+      count: SliderViewModel.instance.urlImages.length,
       effect: SwapEffect(
         dotHeight: AppSize.s12,
         dotWidth: AppSize.s12,
@@ -258,28 +238,26 @@ class _HomePageState extends State<HomePage>
 
   Widget _bookView(int index) {
     return InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, RoutesName.webView,
-              arguments: {'link': booksLink});
-        },
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: [
-            ListTile(
-                trailing: textImages[index] == textImages[0]
-                    ? Text(
-                        "View",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorManager.white,
-                          fontSize: 20.0,
-                        ),
-                      )
-                    : Text('')),
-          ],
-        ));
+      onTap: () {
+        SliderViewModel.instance.getBooks;
+      },
+      child: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          ListTile(
+              trailing: SliderViewModel.instance.urlImages[index] ==
+                      SliderViewModel.instance.urlImages[0]
+                  ? Text(
+                      "View",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: ColorManager.white,
+                        fontSize: 20.0,
+                      ),
+                    )
+                  : Text('')),
+        ],
+      ),
+    );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

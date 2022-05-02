@@ -14,6 +14,7 @@ import 'package:dev_guide/src/presentation/widget/rounded_input_field.dart';
 import 'package:dev_guide/src/presentation/widget/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class SigninPage extends StatelessWidget {
@@ -109,6 +110,7 @@ class SigninPage extends StatelessWidget {
                     ),
                     RoundeButton(
                       text: Constants.singIn,
+                      isLoading: Authentication.instance.isLoading.value,
                       press: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
@@ -116,7 +118,6 @@ class SigninPage extends StatelessWidget {
                           Authentication.instance.signInWithEmailAndPassword();
                         }
                       },
-                      isLoading: false,
                       color: ColorManager.secondary,
                       textColor: ColorManager.white,
                     ),

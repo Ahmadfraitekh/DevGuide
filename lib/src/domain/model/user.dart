@@ -1,5 +1,3 @@
-import 'package:dev_guide/src/core/constants.dart';
-
 class UserModel {
   String? userId, email, fullName;
 
@@ -15,16 +13,16 @@ class UserModel {
       return;
     }
 
-    userId = map[Constants.userID];
-    email = map[Constants.userEmail];
-    fullName = map[Constants.userName];
+    userId = map['userId'];
+    email = map['email'];
+    fullName = map['fullName'];
   }
 
   toJson() {
     return {
-      Constants.userID: userId,
-      Constants.userEmail: email,
-      Constants.userName: fullName,
+      'userId': userId,
+      'email': email,
+      'fullName': fullName,
     };
   }
 }

@@ -9,18 +9,19 @@ import 'package:get/get.dart';
 
 class SplashViewModel extends GetxController {
   static SplashViewModel instance = Get.find();
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   // todo: How to checked if the user logged in or not from splach screen
   // todo: if the user is not logged in so it will open the login page after splash screen
   // todo: and if the user is already logged in it will open the home page after splash screen
   // todo: https://www.youtube.com/watch?v=j5UQ2yaAJn0&list=PLV1fXIAyjeuZ2pOUkmHwzMJCJgCedrQJW&index=10
 
-  // late Rx<User?> _user;
-
   _startTime() async {
-    var duration = const Duration(seconds: 2);
+    var duration = const Duration(seconds: 4);
     return Timer(duration, _navigationPage);
   }
+
+  get startTime => _startTime();
 
   void _navigationPage() async {
     Preference.load().then((value) {
@@ -37,11 +38,16 @@ class SplashViewModel extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    _startTime();
+    startTime;
   }
 
   @override
   void onReady() {
     super.onReady();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
   }
 }

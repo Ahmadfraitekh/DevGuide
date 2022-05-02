@@ -148,13 +148,13 @@ class SignUpPage extends StatelessWidget {
                     ),
                     RoundeButton(
                       text: Constants.singUp,
+                      isLoading: Authentication.instance.isLoading.value,
                       press: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           Authentication.instance.signUpWithEmailAndPassword();
                         }
                       },
-                      isLoading: false,
                       color: ColorManager.secondary,
                       textColor: ColorManager.white,
                     ),
