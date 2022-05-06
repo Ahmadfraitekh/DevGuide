@@ -1,9 +1,11 @@
+import 'package:dev_guide/src/core/routes_name.dart';
 import 'package:dev_guide/src/domain/viewmodel/auth_viewmodel/authentication.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
 import 'package:dev_guide/src/presentation/widget/back_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
@@ -234,7 +236,9 @@ class ProfilePage extends StatelessWidget {
         ),
         Center(
           child: GestureDetector(
-            onTap: () => Authentication.instance.logOut(),
+            onTap: () {
+              Authentication.instance.logOut();
+            },
             child: Text(
               'Sign out',
               style: TextStyle(

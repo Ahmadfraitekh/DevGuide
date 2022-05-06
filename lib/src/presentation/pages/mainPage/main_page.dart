@@ -21,93 +21,76 @@ class MainPage extends GetWidget<MainViewModel> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  var initial = MainViewModel.instance.onInit();
-  var close = MainViewModel.instance.onClose();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   _pageController = PageController(initialPage: _pageIndex);
-  // }
-
-  // @override
-  // void dispose() {
-  //   _pageController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
     _theme = Theme.of(context);
     return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: _theme.scaffoldBackgroundColor,
-        appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p8,
-              vertical: AppPadding.p8,
-            ),
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      ImageAssets.appLogo,
-                      width: _width * 0.12,
-                    ),
-                    const SizedBox(
-                      height: AppSize.s1,
-                    ),
-                    Text(
-                      Constants.appName,
-                      //style: _theme.textTheme.caption,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          centerTitle: false,
-          titleSpacing: 10,
-          backgroundColor: ColorManager.secondary,
-          elevation: 0.0,
-          actions: [
-            Padding(
+      child: GetBuilder<MainViewModel>(
+        init: MainViewModel(),
+        builder: (ctr) => Scaffold(
+          key: _scaffoldKey,
+          backgroundColor: _theme.scaffoldBackgroundColor,
+          appBar: AppBar(
+            title: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppPadding.p8,
                 vertical: AppPadding.p8,
               ),
-              child: CircleAvatar(
-                backgroundColor: ColorManager.white,
-                radius: 29.0,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Image.asset(
+                        ImageAssets.appLogo,
+                        width: _width * 0.12,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s1,
+                      ),
+                      Text(
+                        Constants.appName,
+                        //style: _theme.textTheme.caption,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            centerTitle: false,
+            titleSpacing: 10,
+            backgroundColor: ColorManager.secondary,
+            elevation: 0.0,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p8,
+                  vertical: AppPadding.p8,
+                ),
                 child: CircleAvatar(
-                  radius: 30.0,
-                  backgroundColor: ColorManager.secondary,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, RoutesName.profile);
-                    },
-                    icon: Icon(
-                      FontAwesomeIcons.solidUser,
-                      size: AppSize.s25,
-                      color: ColorManager.white,
+                  backgroundColor: ColorManager.white,
+                  radius: 29.0,
+                  child: CircleAvatar(
+                    radius: 30.0,
+                    backgroundColor: ColorManager.secondary,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, RoutesName.profile);
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.solidUser,
+                        size: AppSize.s25,
+                        color: ColorManager.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          body: ctr.currentPage,
+          bottomNavigationBar: _bottomNavigatonBar(),
         ),
-        body: PageView(
-          children: MainViewModel.instance.pages,
-          onPageChanged: (page) => MainViewModel.instance.onPageChange(page),
-          controller: MainViewModel.instance.pageController,
-        ),
-        bottomNavigationBar: _bottomNavigatonBar(),
       ),
     );
   }
@@ -119,10 +102,10 @@ class MainPage extends GetWidget<MainViewModel> {
   Widget _bottomNavigatonBar() {
     return GetBuilder<MainViewModel>(
       init: MainViewModel(),
-      builder: (controller) => BottomNavigationBar(
-        currentIndex: MainViewModel.instance.pageIndex,
+      builder: (ctr) => BottomNavigationBar(
+        currentIndex: ctr.navigatorValue,
         type: BottomNavigationBarType.fixed,
-        onTap: (index) => MainViewModel.instance.onTabTapped(index),
+        onTap: (index) => ctr.changeSelectedValue(index),
         showUnselectedLabels: true,
         selectedItemColor: ColorManager.white,
         unselectedItemColor: ColorManager.grey2.withOpacity(0.7),

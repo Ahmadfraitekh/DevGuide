@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 class SliderViewModel extends GetxController {
   static SliderViewModel instance = Get.find();
 
-  int activeIndex = 0;
+  int _activeIndex = 0;
 
   List get urlImages => _urlImages;
   List get textImages => _textImages;
-
+  get activeIndex => _activeIndex;
   get getBooks => _getBooksFromWebSite();
 
   final _urlImages = [
@@ -27,10 +27,14 @@ class SliderViewModel extends GetxController {
   final String _booksLink = 'https://books.goalkicker.com/';
 
   void _getBooksFromWebSite() {
-    Get.offNamedUntil(
+    Get.toNamed(
       RoutesName.webView,
-      (route) => false,
       arguments: {'link': _booksLink},
     );
+  }
+
+  void sliderPageChange(int indexValue) {
+    _activeIndex = indexValue;
+    update();
   }
 }

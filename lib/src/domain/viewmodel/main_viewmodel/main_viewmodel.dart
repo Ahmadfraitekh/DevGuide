@@ -2,58 +2,34 @@ import 'package:dev_guide/src/presentation/pages/categoryPage/category.dart';
 import 'package:dev_guide/src/presentation/pages/favoritePage/favorite.dart';
 import 'package:dev_guide/src/presentation/pages/homePage/home.dart';
 import 'package:dev_guide/src/presentation/pages/searchPage/search.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class MainViewModel extends GetxController {
-  static MainViewModel instance = Get.find();
-  int _pageIndex = 0;
-  PageController? _pageController;
-  List<Widget> _pages = [
-    HomePage(),
-    const CategroyPage(),
-    const SearchPage(),
-    const FavoritePage(),
-  ];
+  int _navigatorValue = 0;
 
-  int get pageIndex => _pageIndex;
-  set pageIndex(int page) => _pageIndex;
-  get pageController => _pageController;
-  get pages => _pages;
+  Widget _currentPage = HomePage();
 
-  @override
-  void onInit() {
-    _pageController = PageController(initialPage: _pageIndex);
-    super.onInit();
-  }
+  get navigatorValue => _navigatorValue;
+  get currentPage => _currentPage;
 
-  @override
-  void onReady() {
-    _pageController!.dispose();
-    super.onReady();
-  }
+  void changeSelectedValue(int indexValue) {
+    _navigatorValue = indexValue;
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  // void changedIndexValue(int index) {
-  //   _pageIndex = index;
-  //   update();
-  // }
-
-  /// [index] current page index
-  void onTabTapped(int index) {
-    _pageIndex = index;
-    _pageController!.jumpToPage(index);
-    update();
-  }
-
-  /// [page] current page
-  //When page is Changed
-  void onPageChange(int page) {
-    _pageIndex = page;
+    switch (indexValue) {
+      case 0:
+        _currentPage = HomePage();
+        break;
+      case 1:
+        _currentPage = CategroyPage();
+        break;
+      case 2:
+        _currentPage = SearchPage();
+        break;
+      case 3:
+        _currentPage = FavoritePage();
+        break;
+    }
     update();
   }
 }

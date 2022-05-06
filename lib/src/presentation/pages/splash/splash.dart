@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/domain/viewmodel/splash_viewmodel/splash_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/assets_manager.dart';
@@ -6,14 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class SplashPage extends GetWidget<SplashViewModel> {
+class SplashPage extends GetView<SplashViewModel> {
   SplashPage({Key? key}) : super(key: key);
 
   var initial = SplashViewModel.instance.onInit();
 
-  late var width;
   late ThemeData _theme;
-
+  late double width;
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;

@@ -4,6 +4,7 @@ import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
 import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatelessWidget {
@@ -162,20 +163,23 @@ class HomePage extends StatelessWidget {
           child: SizedBox(
             height: AppSize.s190,
             width: 400.0,
-            child: CarouselSlider.builder(
-              itemCount: SliderViewModel.instance.urlImages.length,
-              itemBuilder: (context, index, realIndex) {
-                final urlImage = SliderViewModel.instance.urlImages[index];
-                return _buildImage(urlImage, index);
-              },
-              options: CarouselOptions(
-                  height: 400.0,
-                  autoPlay: true,
-                  viewportFraction: 1,
-                  autoPlayInterval: Duration(seconds: 5),
-                  onPageChanged: (index, reason) {
-                    SliderViewModel.instance.activeIndex = index;
-                  }),
+            child: GetBuilder<SliderViewModel>(
+              init: SliderViewModel(),
+              builder: (ctr) => CarouselSlider.builder(
+                itemCount: SliderViewModel.instance.urlImages.length,
+                itemBuilder: (context, index, realIndex) {
+                  final urlImage = SliderViewModel.instance.urlImages[index];
+                  return _buildImage(urlImage, index);
+                },
+                options: CarouselOptions(
+                    height: 400.0,
+                    autoPlay: true,
+                    viewportFraction: 1,
+                    autoPlayInterval: Duration(seconds: 5),
+                    onPageChanged: (index, reason) {
+                      ctr.sliderPageChange(index);
+                    }),
+              ),
             ),
           ),
         ),
@@ -224,14 +228,17 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildIndicator() {
-    return AnimatedSmoothIndicator(
-      activeIndex: SliderViewModel.instance.activeIndex,
-      count: SliderViewModel.instance.urlImages.length,
-      effect: SwapEffect(
-        dotHeight: AppSize.s12,
-        dotWidth: AppSize.s12,
-        dotColor: ColorManager.secondary,
-        activeDotColor: ColorManager.primary,
+    return GetBuilder<SliderViewModel>(
+      init: SliderViewModel(),
+      builder: (ctr) => AnimatedSmoothIndicator(
+        activeIndex: ctr.activeIndex,
+        count: ctr.urlImages.length,
+        effect: SwapEffect(
+          dotHeight: AppSize.s12,
+          dotWidth: AppSize.s12,
+          dotColor: ColorManager.secondary,
+          activeDotColor: ColorManager.primary,
+        ),
       ),
     );
   }
