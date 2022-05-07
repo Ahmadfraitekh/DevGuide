@@ -1,4 +1,5 @@
 import 'package:dev_guide/src/core/routes_name.dart';
+import 'package:dev_guide/src/domain/model/categories.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/styles_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 class SubCategroyPage extends StatefulWidget {
   const SubCategroyPage({Key? key, required this.category}) : super(key: key);
 
-  final Map category;
+  final CategoriesModel category;
 
   @override
   State<SubCategroyPage> createState() => _SubCategroyPage();
@@ -88,7 +89,7 @@ class _SubCategroyPage extends State<SubCategroyPage>
             Padding(
               padding: const EdgeInsets.all(AppSize.s18),
               child: Text(
-                widget.category["name"],
+                widget.category.name!,
                 style: _theme.textTheme.labelMedium,
               ),
             ),
