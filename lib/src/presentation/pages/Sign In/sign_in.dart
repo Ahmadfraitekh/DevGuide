@@ -210,14 +210,16 @@ class SigninPage extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                RoutesName.mainPage,
-                                (route) => false,
-                              );
+                              // Navigator.pushNamedAndRemoveUntil(
+                              //   context,
+                              //   RoutesName.mainPage,
+                              //   (route) => false,
+                              // );
+                              Get.offNamedUntil(
+                                  RoutesName.mainPage, (route) => false);
                             },
                             child: Text(
-                              Constants.skip,
+                              Constants.explore,
                               style: TextStyle(
                                   fontSize: FontSize.s20,
                                   fontWeight: FontWeightManager.bold,

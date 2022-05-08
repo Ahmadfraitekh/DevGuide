@@ -1,10 +1,14 @@
+import 'dart:math';
+
 class UserModel {
-  String? userId, email, fullName;
+  String? userId;
+  String? email;
+  String? fullName;
 
   UserModel({
-    required this.userId,
-    required this.email,
-    required this.fullName,
+    this.userId,
+    this.email,
+    this.fullName,
   });
 
   UserModel.fromJson(Map<dynamic, dynamic> map) {
@@ -18,7 +22,7 @@ class UserModel {
     fullName = map['fullName'];
   }
 
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'userId': userId,
       'email': email,

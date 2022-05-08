@@ -1,3 +1,4 @@
+import 'package:dev_guide/src/core/helper/local_storage_data.dart';
 import 'package:dev_guide/src/core/helper/service/firestore_user.dart';
 import 'package:dev_guide/src/core/routes_name.dart';
 import 'package:dev_guide/src/domain/model/user.dart';
@@ -10,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class Authentication extends GetxController {
   // it's like controller property you can use it to call all data here inside any widget
   static Authentication instance = Get.find();
+  final LocalStorageData localStorageData = Get.find();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late final GoogleSignIn _googleSignIn;
@@ -23,6 +25,7 @@ class Authentication extends GetxController {
     password = '';
     fullName = '';
     isLoading.value = false;
+
     super.onInit();
   }
 
@@ -91,10 +94,20 @@ class Authentication extends GetxController {
   void signInWithEmailAndPassword() async {
     try {
       isLoadingState();
-      await _auth.signInWithEmailAndPassword(
+      await _auth
+          .signInWithEmailAndPassword(
         email: email!,
         password: password!,
-      );
+      )
+          .then((value) async {
+        await FireStoreUser().getCurrentUser(value.user!.uid).then((value) {
+          setUser(
+            UserModel.fromJson(
+              value.data() as Map<dynamic, dynamic>,
+            ),
+          );
+        });
+      });
       Get.offNamedUntil(RoutesName.mainPage, (route) => false);
     } catch (e) {
       Get.snackbar(
@@ -134,16 +147,21 @@ class Authentication extends GetxController {
 
   void logOut() async {
     await _auth.signOut();
+    Get.offNamedUntil(RoutesName.signin, (route) => false);
   }
 
   void saveUser(UserCredential user) async {
-    await FireStoreUser().addUserToFireStore(
-      UserModel(
-        userId: user.user!.uid,
-        email: user.user!.email,
-        fullName: fullName == null ? user.user!.displayName : fullName,
-      ),
+    UserModel userModel = UserModel(
+      userId: user.user!.uid,
+      email: user.user!.email,
+      fullName: fullName == null ? user.user!.displayName : fullName,
     );
+    await FireStoreUser().addUserToFireStore(userModel);
+    setUser(userModel);
+  }
+
+  void setUser(UserModel userModel) async {
+    await localStorageData.setUser(userModel);
   }
 
   void isLoadingState() async {

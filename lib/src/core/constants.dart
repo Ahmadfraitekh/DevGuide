@@ -12,7 +12,7 @@ abstract class Constants {
   //Button Text
   static const String singIn = "Sign In";
   static const String singUp = "Sign Up";
-  static const String skip = "Skip";
+  static const String explore = "Explore";
 
   //Normal Text
   static const String dontHaveAnAccount = "Dont't have an account?";
@@ -29,12 +29,14 @@ abstract class Constants {
       GlobalKey<NavigatorState>();
 
   // Database References
-  static const String userID = 'userId';
-  static const String userToken = 'userToken';
+  // static const String userID = 'userId';
+  // static const String userToken = 'userToken';
 
-  static const userName = 'userName';
-  static const userPhoto = 'userPhoto';
-  static const userEmail = 'userEmail';
-  static const userPhone = 'userPhone';
-  static const loginBySocialMedia = 'loginBySocialMedia';
+  // static const userName = 'userName';
+  // static const userPhoto = 'userPhoto';
+  // static const userEmail = 'userEmail';
+  // static const userPhone = 'userPhone';
+  // static const loginBySocialMedia = 'loginBySocialMedia';
+
+  static const CACHED_USER_DATA = 'CACHED_USER_DATA';
 }

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class SplashPage extends GetView<SplashViewModel> {
+class SplashPage extends GetWidget<SplashViewModel> {
   SplashPage({Key? key}) : super(key: key);
 
   var initial = SplashViewModel.instance.onInit();
