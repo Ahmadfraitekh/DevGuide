@@ -13,7 +13,7 @@ class Binding extends Bindings {
   void dependencies() {
     Get.lazyPut<Authentication>(() => Authentication());
     Get.put<MainViewModel>(MainViewModel());
-    Get.put<SplashViewModel>(SplashViewModel());
+    Get.lazyPut<SplashViewModel>(() => SplashViewModel());
     Get.put<SliderViewModel>(SliderViewModel());
     Get.put<CategoriesViewModel>(CategoriesViewModel());
     Get.put<LocalStorageData>(LocalStorageData());
