@@ -156,7 +156,7 @@ class HomePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Card(
-          color: ColorManager.scaffoldBackgroundColor,
+          //color: ColorManager.scaffoldBackgroundColor,
           clipBehavior: Clip.antiAlias,
           elevation: 10.0,
           shadowColor: ColorManager.secondary,

@@ -98,7 +98,10 @@ class _CoursePageState extends State<CoursePage>
         ),
         Padding(
           padding: EdgeInsets.all(AppPadding.p8),
-          child: Text(widget.courses["desc"]),
+          child: Text(
+            widget.courses["desc"],
+            style: _theme.textTheme.caption,
+          ),
         ),
         _courses(),
       ],

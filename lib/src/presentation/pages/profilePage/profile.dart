@@ -1,6 +1,6 @@
 import 'package:dev_guide/src/core/constants.dart';
+import 'package:dev_guide/src/core/helper/local_storage_data.dart';
 import 'package:dev_guide/src/core/routes_name.dart';
-import 'package:dev_guide/src/domain/viewmodel/auth_viewmodel/authentication.dart';
 import 'package:dev_guide/src/domain/viewmodel/profile_viewmodel/profile_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
@@ -14,13 +14,13 @@ import 'package:get/get.dart';
 class ProfilePage extends StatelessWidget {
   ProfilePage({Key? key}) : super(key: key);
   late ThemeData _theme;
+  LocalStorageData controller = Get.find();
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
     return GetBuilder<ProfileViewModel>(
         init: ProfileViewModel(),
         builder: (ctr) => Scaffold(
-              backgroundColor: ColorManager.scaffoldBackgroundColor,
               body: ctr.notUser.value
                   ? Center(
                       child: Container(
@@ -119,7 +119,6 @@ class ProfilePage extends StatelessWidget {
     return GetBuilder<ProfileViewModel>(
       init: ProfileViewModel(),
       builder: (ctr) => Card(
-        color: ColorManager.scaffoldBackgroundColor,
         elevation: 0.0,
         child: Column(
           children: [
@@ -238,10 +237,16 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Switch(
-                    value: true,
-                    activeColor: ColorManager.secondary,
-                    onChanged: (bool value) {},
+                  child: ObxValue(
+                    (data) => Switch(
+                      value: ctr.isDark.value,
+                      onChanged: (val) {
+                        ctr.changeTheme(val);
+
+                        print(val);
+                      },
+                    ),
+                    false.obs,
                   ),
                 ),
               ],
@@ -279,33 +284,33 @@ class ProfilePage extends StatelessWidget {
             endIndent: 10,
             indent: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: AppPadding.p28,
-              top: AppPadding.p8,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Text(
-                    'Help and Support',
-                    style: TextStyle(
-                      fontSize: 13.5,
-                      color: ColorManager.secondary,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 20.0,
-                    color: ColorManager.secondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     left: AppPadding.p28,
+          //     top: AppPadding.p8,
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       Expanded(
+          //         flex: 5,
+          //         child: Text(
+          //           'Help and Support',
+          //           style: TextStyle(
+          //             fontSize: 13.5,
+          //             color: ColorManager.secondary,
+          //           ),
+          //         ),
+          //       ),
+          //       Expanded(
+          //         child: Icon(
+          //           Icons.arrow_forward_ios,
+          //           size: 20.0,
+          //           color: ColorManager.secondary,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(
               left: AppPadding.p28,
@@ -324,10 +329,15 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 20.0,
-                    color: ColorManager.secondary,
+                  child: GestureDetector(
+                    onTap: () {
+                      // todo: navigate to the about DevGuide screen
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20.0,
+                      color: ColorManager.secondary,
+                    ),
                   ),
                 )
               ],
@@ -335,7 +345,7 @@ class ProfilePage extends StatelessWidget {
           ),
 
           SizedBox(
-            height: AppSize.s20,
+            height: AppSize.s40,
           ),
           Center(
             child: Container(
@@ -369,7 +379,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: AppSize.s18,
+            height: AppSize.s20,
           ),
           Center(
             child: Text(

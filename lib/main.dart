@@ -13,7 +13,6 @@ void main() async {
 
   await Firebase.initializeApp();
   await SharedPreferences.getInstance();
-
   runApp(MyApp());
 }
 
@@ -28,6 +27,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: Constants.navigatorKey,
       title: Constants.appName,
       theme: getLightTheme(),
+      darkTheme: getDarkTheme(),
+      themeMode: ThemeMode.system,
       initialRoute: '/',
       onGenerateRoute: Routes.generateRoute,
     );

@@ -39,4 +39,5 @@ abstract class Constants {
   // static const loginBySocialMedia = 'loginBySocialMedia';
 
   static const CACHED_USER_DATA = 'CACHED_USER_DATA';
+  static const DARK_THEME_KEY = 'isDarkMode';
 }
