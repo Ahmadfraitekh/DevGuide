@@ -1,4 +1,3 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/domain/viewmodel/splash_viewmodel/splash_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/assets_manager.dart';
