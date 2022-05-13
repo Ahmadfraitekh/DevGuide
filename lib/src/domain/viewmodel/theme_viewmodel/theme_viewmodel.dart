@@ -9,7 +9,7 @@ class ThemeViewModel {
   // Themes with get Storage
   final _storage = GetStorage();
   // Get isDarkMode info from local storage and return ThemeMode
-  ThemeMode get theme => _getThemeStatus() ? ThemeMode.light : ThemeMode.dark;
+  ThemeMode get theme => _getThemeStatus() ? ThemeMode.dark : ThemeMode.light;
 
   // Save isDarkMode to local storage
   _saveThemeStatus(bool isDarkMode) =>
@@ -24,7 +24,7 @@ class ThemeViewModel {
     // Get.changeThemeMode(getThemeStatus() ? ThemeMode.light : ThemeMode.dark);
     // saveThemeStatus(!getThemeStatus());
 
-    Get.changeThemeMode(_getThemeStatus() ? ThemeMode.dark : ThemeMode.light);
+    Get.changeThemeMode(_getThemeStatus() ? ThemeMode.light : ThemeMode.dark);
     _saveThemeStatus(!_getThemeStatus());
   }
 }

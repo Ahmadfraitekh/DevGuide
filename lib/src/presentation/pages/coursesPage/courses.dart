@@ -156,7 +156,7 @@ class _CoursesPageState extends State<CoursesPage> {
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          color: ColorManager.black,
+          color: ColorManager.primary,
         ),
       ),
     );

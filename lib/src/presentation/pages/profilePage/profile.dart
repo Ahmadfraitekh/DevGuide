@@ -1,4 +1,3 @@
-import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/core/helper/local_storage_data.dart';
 import 'package:dev_guide/src/core/routes_name.dart';
 import 'package:dev_guide/src/domain/viewmodel/profile_viewmodel/profile_viewmodel.dart';
@@ -39,7 +38,7 @@ class ProfilePage extends StatelessWidget {
                                   isLoading: ctr.isLoading.value,
                                   press: () => Get.offNamedUntil(
                                       RoutesName.signup, (route) => false),
-                                  text: 'Sign Up'.toUpperCase(),
+                                  text: 'signUp'.tr.toUpperCase(),
                                   textColor: ColorManager.white,
                                 ),
                               ),
@@ -50,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                                 onTap: () => Get.offNamedUntil(
                                     RoutesName.signin, (route) => false),
                                 child: Text(
-                                  Constants.alreadyHaveAnAccount,
+                                  'alreadyHaveAnAccount?'.tr,
                                   style: _theme.textTheme.headline3,
                                 ),
                               ),
@@ -68,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                                       children: [
                                         BackIcon(),
                                         Text(
-                                          'back',
+                                          'back'.tr,
                                           style: _theme.textTheme.headline1,
                                         )
                                       ],
@@ -96,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(AppPadding.p16),
                                 child: Text(
-                                  'Account',
+                                  'accout'.tr,
                                   style: _theme.textTheme.labelMedium,
                                 ),
                               )
@@ -183,9 +182,12 @@ class ProfilePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: AppPadding.p16),
+            padding: const EdgeInsets.only(
+              left: AppPadding.p16,
+              right: AppPadding.p4,
+            ),
             child: Text(
-              'Settings',
+              'settings'.tr,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0,
@@ -224,13 +226,14 @@ class ProfilePage extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: AppPadding.p28,
               top: AppPadding.p4,
+              right: AppPadding.p8,
             ),
             child: Row(
               children: [
                 Expanded(
                   flex: 5,
                   child: Text(
-                    'Light / Dark',
+                    'theme'.tr,
                     style: TextStyle(
                       fontSize: 13.5,
                       color: ColorManager.secondary,
@@ -260,13 +263,14 @@ class ProfilePage extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: AppPadding.p28,
               top: AppPadding.p8,
+              right: AppPadding.p8,
             ),
             child: Row(
               children: [
                 Expanded(
                   flex: 5,
                   child: Text(
-                    'Languages',
+                    'language'.tr,
                     style: TextStyle(
                       fontSize: 13.5,
                       color: ColorManager.secondary,
@@ -274,21 +278,38 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Switch(
-                    value: false,
-                    activeColor: ColorManager.primary,
-                    activeTrackColor: ColorManager.background,
-                    inactiveThumbColor: ColorManager.secondary,
-                    inactiveTrackColor: ColorManager.background,
-                    onChanged: (value) {
-                      // todo: create another key value and variable for
-                      // todo: this switch that differ from theme switch in profile view model
-                      // ctr.isSwitchedState(value) == true
-                      //     ? Get.snackbar("", 'active',
-                      //         snackPosition: SnackPosition.BOTTOM)
-                      //     : Get.snackbar("", 'not active',
-                      //         snackPosition: SnackPosition.BOTTOM);
+                  child: DropdownButton<String>(
+                    dropdownColor: ColorManager.background,
+                    value: ctr.savedLang.value,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      size: 20.0,
+                      color: ColorManager.secondary,
+                    ),
+                    elevation: 16,
+                    style: TextStyle(color: ColorManager.primary),
+                    underline: Container(
+                      //padding: EdgeInsets.all(AppPadding.p2),
+                      height: 1.0,
+                      width: 1.0,
+                      color: ColorManager.secondary,
+                    ),
+                    onChanged: (newValue) {
+                      ctr.savedLang.value = newValue!;
+                      Get.updateLocale(Locale(newValue.toLowerCase()));
+                      ctr.saveLocale();
                     },
+                    items: [
+                      'EN',
+                      'AR',
+                    ].map<DropdownMenuItem<String>>(
+                      (value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      },
+                    ).toList(),
                   ),
                 ),
               ],
@@ -330,13 +351,14 @@ class ProfilePage extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: AppPadding.p28,
               top: AppPadding.p16,
+              right: AppPadding.p8,
             ),
             child: Row(
               children: [
                 Expanded(
                   flex: 5,
                   child: Text(
-                    'About DevGuide',
+                    'aboutDevGuide'.tr,
                     style: TextStyle(
                       fontSize: 13.5,
                       color: ColorManager.secondary,
@@ -365,8 +387,8 @@ class ProfilePage extends StatelessWidget {
           Center(
             child: Container(
               //margin: EdgeInsets.only(left: 30, top: 20, right: 30, bottom: 10),
-              height: 25.0,
-              width: 90.0,
+              height: 28.0,
+              width: 200,
               decoration: BoxDecoration(
                 color: ColorManager.background.withOpacity(0.8),
                 borderRadius: BorderRadius.only(
@@ -381,21 +403,21 @@ class ProfilePage extends StatelessWidget {
                   // todo: add alert dialog to ensure the user if they want to log out or not
                   Get.defaultDialog(
                     backgroundColor: ColorManager.background,
-                    title: 'Logout',
+                    title: 'signout'.tr,
                     titlePadding: const EdgeInsets.only(top: AppPadding.p30),
                     titleStyle: TextStyle(
                       color: ColorManager.secondary,
                     ),
                     content: Text(
-                      'Are you sure that you want to logout?',
+                      'areYouSureToSignout?'.tr,
                       style: TextStyle(color: ColorManager.primary),
                     ),
                     contentPadding: const EdgeInsets.only(
                       bottom: AppPadding.p30,
                       top: AppPadding.p20,
                     ),
-                    textCancel: 'Cancel',
-                    textConfirm: 'Logout',
+                    textCancel: 'cancel'.tr,
+                    textConfirm: 'signout'.tr,
                     confirmTextColor: ColorManager.background,
                     cancelTextColor: ColorManager.primary,
                     buttonColor: ColorManager.primary,
@@ -406,7 +428,7 @@ class ProfilePage extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  'Sign Out',
+                  'signout'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,

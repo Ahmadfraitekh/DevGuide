@@ -15,6 +15,7 @@ class ProfileViewModel extends GetxController {
     super.onInit();
     getCurrentUser();
     _saveSwitchThemeStatus(isSwitched);
+    getLocale();
   }
 
   ProfileViewModel() {
@@ -67,5 +68,23 @@ class ProfileViewModel extends GetxController {
     isSwitched = value;
     _saveSwitchThemeStatus(isSwitched);
     update();
+  }
+
+  // Save the languages
+
+  var savedLang = 'EN'.obs;
+
+  saveLocale() {
+    localStorageData.createString(Constants.LOCALE_LANG_KEY, savedLang.value);
+  }
+
+  Future<void> getLocale() async {
+    localStorageData.readString(Constants.LOCALE_LANG_KEY).then((value) {
+      if (value != '' && value != null) {
+        Get.updateLocale(Locale(value.toString().toLowerCase()));
+        savedLang = value.toString().obs;
+        //update();
+      }
+    });
   }
 }

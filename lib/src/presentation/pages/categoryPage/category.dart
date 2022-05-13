@@ -8,6 +8,7 @@ import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CategroyPage extends StatelessWidget {
   CategroyPage({Key? key}) : super(key: key);
   late ThemeData _theme;
@@ -145,7 +146,7 @@ class CategroyPage extends StatelessWidget {
           ),
           trailing: Icon(
             Icons.arrow_forward_ios,
-            color: ColorManager.black,
+            color: ColorManager.primary,
           ),
         ),
       ),

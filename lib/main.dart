@@ -1,5 +1,6 @@
 import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/core/helper/binding.dart';
+import 'package:dev_guide/src/core/helper/languages/translations.dart';
 import 'package:dev_guide/src/core/route.dart';
 import 'package:dev_guide/src/domain/viewmodel/theme_viewmodel/theme_viewmodel.dart';
 
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
       theme: getLightTheme(),
       darkTheme: getDarkTheme(),
       themeMode: ThemeViewModel().theme,
+      translations: Translation(),
+      locale: Locale('en'),
+      fallbackLocale: Locale('ar'),
       initialRoute: '/',
       onGenerateRoute: Routes.generateRoute,
     );

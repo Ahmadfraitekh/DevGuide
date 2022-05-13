@@ -13,7 +13,6 @@ import 'package:dev_guide/src/presentation/widget/rounded_input_field.dart';
 import 'package:dev_guide/src/presentation/widget/rounded_password_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -82,7 +81,7 @@ class SignUpPage extends StatelessWidget {
                         onChange: (value) {},
                         //AppCubit.get(context).fullName = value,
                         // valueText: _fullName,
-                        hintText: Constants.fullName,
+                        hintText: 'fullName'.tr,
                         icon: Icons.person,
                         inputType: TextInputType.text,
                         validator: (fullName) {
@@ -94,7 +93,7 @@ class SignUpPage extends StatelessWidget {
                           if (!InputValidationMixin.isEmpty(fullName)) {
                             return null;
                           } else {
-                            return Constants.fullNameRequired;
+                            return 'yourNameIsRequired'.tr;
                           }
                         },
                         onSave: (value) {
@@ -105,7 +104,7 @@ class SignUpPage extends StatelessWidget {
                         controller: _emailController,
                         onChange: (value) {},
                         // valueText: _email,
-                        hintText: Constants.email,
+                        hintText: 'email'.tr,
                         icon: Icons.email,
                         inputType: TextInputType.emailAddress,
                         validator: (email) {
@@ -119,10 +118,10 @@ class SignUpPage extends StatelessWidget {
                           if (InputValidationMixin.isEmailValid(email)) {
                             return null;
                           } else if (InputValidationMixin.isEmpty(email)) {
-                            return Constants.emailRequired;
+                            return 'emailIsRequired'.tr;
                           } else if (!InputValidationMixin.isEmailValid(
                               email)) {
-                            return Constants.invalidEmail;
+                            return 'invalidEmail'.tr;
                           }
                         },
                         onSave: (value) {
@@ -133,7 +132,7 @@ class SignUpPage extends StatelessWidget {
                         controller: _passwordController,
                         onChange: (value) {},
                         icon: Icons.lock,
-                        hintText: Constants.password,
+                        hintText: 'password'.tr,
                         validator: (password) {
                           // if (!isEmpty(password)) {
                           //   return null;
@@ -143,7 +142,7 @@ class SignUpPage extends StatelessWidget {
                           if (!InputValidationMixin.isEmpty(password)) {
                             return null;
                           } else {
-                            return Constants.passwordRequired;
+                            return 'passwordIsRequired'.tr;
                           }
                         },
                         onSave: (value) {
@@ -151,7 +150,7 @@ class SignUpPage extends StatelessWidget {
                         },
                       ),
                       RoundeButton(
-                        text: Constants.singUp,
+                        text: 'signUp'.tr,
                         isLoading: ctr.isLoading.value,
                         press: () async {
                           if (_formKey.currentState!.validate()) {
@@ -170,7 +169,7 @@ class SignUpPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            Constants.alreadyHaveAnAccount,
+                            'alreadyHaveAnAccount?'.tr,
                             style: _theme.textTheme.headline4,
                           ),
                           const SizedBox(
@@ -183,7 +182,7 @@ class SignUpPage extends StatelessWidget {
                               Get.offNamed(RoutesName.signin);
                             },
                             child: Text(
-                              Constants.singIn,
+                              'signIn'.tr,
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 color: ColorManager.primary,
@@ -202,7 +201,7 @@ class SignUpPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(AppPadding.p8),
                           child: Text(
-                            'by continuing, you agree to accept our\n privacy policy & terms of service.',
+                            'privacyPolicy'.tr,
                             textAlign: TextAlign.center,
                             style: _theme.textTheme.caption,
                           ),

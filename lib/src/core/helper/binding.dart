@@ -1,5 +1,5 @@
 import 'package:dev_guide/src/core/helper/local_storage_data.dart';
-import 'package:dev_guide/src/domain/model/categories.dart';
+
 import 'package:dev_guide/src/domain/viewmodel/auth_viewmodel/authentication.dart';
 import 'package:dev_guide/src/domain/viewmodel/category_viewmodel/categories_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/main_viewmodel/main_viewmodel.dart';

@@ -76,16 +76,16 @@ class SigninPage extends StatelessWidget {
                     RoundedInputField(
                       onChange: (value) => _email = value,
                       valueText: _email,
-                      hintText: Constants.email,
+                      hintText: 'email'.tr,
                       icon: Icons.email,
                       inputType: TextInputType.emailAddress,
                       validator: (email) {
                         if (InputValidationMixin.isEmailValid(email)) {
                           return null;
                         } else if (InputValidationMixin.isEmpty(email)) {
-                          return Constants.emailRequired;
+                          return 'emailIsRequired'.tr;
                         } else if (!InputValidationMixin.isEmpty(email)) {
-                          return Constants.invalidEmail;
+                          return 'invalidEmail'.tr;
                         }
                       },
                       onSave: (value) {
@@ -96,12 +96,12 @@ class SigninPage extends StatelessWidget {
                     RoundedPasswordField(
                       onChange: (value) => _password = value,
                       icon: Icons.lock,
-                      hintText: Constants.password,
+                      hintText: 'password'.tr,
                       validator: (password) {
                         if (!InputValidationMixin.isEmpty(password)) {
                           return null;
                         } else {
-                          return Constants.passwordRequired;
+                          return 'passwordIsRequired'.tr;
                         }
                       },
                       onSave: (value) {
@@ -109,7 +109,7 @@ class SigninPage extends StatelessWidget {
                       },
                     ),
                     RoundeButton(
-                      text: Constants.singIn,
+                      text: 'signIn'.tr,
                       isLoading: Authentication.instance.isLoading.value,
                       press: () async {
                         if (_formKey.currentState!.validate()) {
@@ -128,7 +128,7 @@ class SigninPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Constants.dontHaveAnAccount,
+                          'don\'tHaveAnAccount?'.tr,
                           style: _theme.textTheme.headline4,
                         ),
                         const SizedBox(
@@ -140,7 +140,7 @@ class SigninPage extends StatelessWidget {
                                 context, RoutesName.signup);
                           },
                           child: Text(
-                            Constants.singUp,
+                            'signUp'.tr,
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: ColorManager.primary,
@@ -215,11 +215,12 @@ class SigninPage extends StatelessWidget {
                               //   RoutesName.mainPage,
                               //   (route) => false,
                               // );
+
                               Get.offNamedUntil(
                                   RoutesName.mainPage, (route) => false);
                             },
                             child: Text(
-                              Constants.explore,
+                              'explore'.tr,
                               style: TextStyle(
                                   fontSize: FontSize.s20,
                                   fontWeight: FontWeightManager.bold,

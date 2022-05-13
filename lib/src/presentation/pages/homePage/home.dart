@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -56,7 +57,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Courses',
+            'courses'.tr,
             style: _theme.textTheme.headline3,
           ),
           const SizedBox(
@@ -85,7 +86,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Most Recently',
+            'mostRecently'.tr,
             style: _theme.textTheme.headline3,
           ),
           const SizedBox(
@@ -114,7 +115,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Popular',
+            'popular'.tr,
             style: _theme.textTheme.headline3,
           ),
           const SizedBox(
@@ -157,7 +158,7 @@ class HomePage extends StatelessWidget {
       children: [
         Card(
           //color: ColorManager.scaffoldBackgroundColor,
-          clipBehavior: Clip.antiAlias,
+          clipBehavior: Clip.none,
           elevation: 10.0,
           shadowColor: ColorManager.secondary,
           child: SizedBox(
@@ -172,13 +173,14 @@ class HomePage extends StatelessWidget {
                   return _buildImage(urlImage, index);
                 },
                 options: CarouselOptions(
-                    height: 400.0,
-                    autoPlay: true,
-                    viewportFraction: 1,
-                    autoPlayInterval: Duration(seconds: 5),
-                    onPageChanged: (index, reason) {
-                      ctr.sliderPageChange(index);
-                    }),
+                  height: 400.0,
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  autoPlayInterval: Duration(seconds: 5),
+                  onPageChanged: (index, reason) {
+                    ctr.sliderPageChange(index);
+                  },
+                ),
               ),
             ),
           ),
@@ -255,7 +257,7 @@ class HomePage extends StatelessWidget {
               trailing: SliderViewModel.instance.urlImages[index] ==
                       SliderViewModel.instance.urlImages[0]
                   ? Text(
-                      "View",
+                      "view".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: ColorManager.white,

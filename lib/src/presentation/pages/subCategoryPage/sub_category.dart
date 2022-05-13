@@ -84,14 +84,14 @@ class _SubCategroyPage extends State<SubCategroyPage>
                   ),
                   child: BackIcon(),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(AppSize.s18),
+                  child: Text(
+                    widget.category.name!,
+                    style: _theme.textTheme.labelMedium,
+                  ),
+                ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(AppSize.s18),
-              child: Text(
-                widget.category.name!,
-                style: _theme.textTheme.labelMedium,
-              ),
             ),
             _subCategoryView(),
           ],
@@ -151,7 +151,7 @@ class _SubCategroyPage extends State<SubCategroyPage>
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          color: ColorManager.black,
+          color: ColorManager.primary,
         ),
       ),
     );

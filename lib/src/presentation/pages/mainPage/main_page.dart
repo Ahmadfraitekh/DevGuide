@@ -25,6 +25,7 @@ class MainPage extends GetWidget<MainViewModel> {
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
     _theme = Theme.of(context);
+    //ProfileViewModel profileViewModel = Get.put(ProfileViewModel());
     return SafeArea(
       child: GetBuilder<MainViewModel>(
         init: MainViewModel(),
@@ -114,25 +115,25 @@ class MainPage extends GetWidget<MainViewModel> {
             icon: Icon(
               Icons.home,
             ),
-            label: 'Home',
+            label: 'home'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.dashboard,
             ),
-            label: 'Category',
+            label: 'category'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
             ),
-            label: 'Search',
+            label: 'search'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.favorite,
             ),
-            label: 'Favorite',
+            label: 'favorite'.tr,
           ),
         ],
       ),

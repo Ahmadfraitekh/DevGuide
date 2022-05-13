@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/domain/model/user.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageData extends GetxController {
@@ -42,6 +42,19 @@ class LocalStorageData extends GetxController {
 
   void deleteUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    await prefs.remove(Constants.CACHED_USER_DATA);
+  }
+
+  //Save Languages data
+
+  Future createString(String key, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
+  Future readString(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var cache = prefs.getString(key) ?? '';
+    return cache;
   }
 }
