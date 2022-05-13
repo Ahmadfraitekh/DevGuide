@@ -1,11 +1,13 @@
 import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/core/helper/binding.dart';
 import 'package:dev_guide/src/core/route.dart';
+import 'package:dev_guide/src/domain/viewmodel/theme_viewmodel/theme_viewmodel.dart';
 
 import 'package:dev_guide/src/presentation/resources/theme_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -13,6 +15,7 @@ void main() async {
 
   await Firebase.initializeApp();
   await SharedPreferences.getInstance();
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       theme: getLightTheme(),
       darkTheme: getDarkTheme(),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeViewModel().theme,
       initialRoute: '/',
       onGenerateRoute: Routes.generateRoute,
     );

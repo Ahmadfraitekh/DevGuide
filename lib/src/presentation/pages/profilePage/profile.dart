@@ -2,6 +2,7 @@ import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/core/helper/local_storage_data.dart';
 import 'package:dev_guide/src/core/routes_name.dart';
 import 'package:dev_guide/src/domain/viewmodel/profile_viewmodel/profile_viewmodel.dart';
+import 'package:dev_guide/src/domain/viewmodel/theme_viewmodel/theme_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
 import 'package:dev_guide/src/presentation/widget/back_icon.dart';
@@ -237,16 +238,19 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: ObxValue(
-                    (data) => Switch(
-                      value: ctr.isDark.value,
-                      onChanged: (val) {
-                        ctr.changeTheme(val);
+                  child: Switch(
+                    activeColor: ColorManager.primary,
+                    activeTrackColor: ColorManager.background,
+                    inactiveThumbColor: ColorManager.secondary,
+                    inactiveTrackColor: ColorManager.background,
+                    value: ctr.isSwitched,
+                    onChanged: (value) {
+                      ctr.isSwitchedThemeState(value) == true
+                          ? ThemeViewModel().switchTheme()
+                          : ThemeViewModel().switchTheme();
 
-                        print(val);
-                      },
-                    ),
-                    false.obs,
+                      print(' Value:  $value');
+                    },
                   ),
                 ),
               ],
@@ -271,9 +275,20 @@ class ProfilePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: Switch(
-                    value: true,
-                    activeColor: ColorManager.secondary,
-                    onChanged: (bool value) {},
+                    value: false,
+                    activeColor: ColorManager.primary,
+                    activeTrackColor: ColorManager.background,
+                    inactiveThumbColor: ColorManager.secondary,
+                    inactiveTrackColor: ColorManager.background,
+                    onChanged: (value) {
+                      // todo: create another key value and variable for
+                      // todo: this switch that differ from theme switch in profile view model
+                      // ctr.isSwitchedState(value) == true
+                      //     ? Get.snackbar("", 'active',
+                      //         snackPosition: SnackPosition.BOTTOM)
+                      //     : Get.snackbar("", 'not active',
+                      //         snackPosition: SnackPosition.BOTTOM);
+                    },
                   ),
                 ),
               ],
@@ -363,8 +378,32 @@ class ProfilePage extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  ctr.signOut();
-                  Get.offAllNamed(RoutesName.signin);
+                  // todo: add alert dialog to ensure the user if they want to log out or not
+                  Get.defaultDialog(
+                    backgroundColor: ColorManager.background,
+                    title: 'Logout',
+                    titlePadding: const EdgeInsets.only(top: AppPadding.p30),
+                    titleStyle: TextStyle(
+                      color: ColorManager.secondary,
+                    ),
+                    content: Text(
+                      'Are you sure that you want to logout?',
+                      style: TextStyle(color: ColorManager.primary),
+                    ),
+                    contentPadding: const EdgeInsets.only(
+                      bottom: AppPadding.p30,
+                      top: AppPadding.p20,
+                    ),
+                    textCancel: 'Cancel',
+                    textConfirm: 'Logout',
+                    confirmTextColor: ColorManager.background,
+                    cancelTextColor: ColorManager.primary,
+                    buttonColor: ColorManager.primary,
+                    onConfirm: () {
+                      ctr.signOut();
+                      Get.offAllNamed(RoutesName.signin);
+                    },
+                  );
                 },
                 child: Text(
                   'Sign Out',

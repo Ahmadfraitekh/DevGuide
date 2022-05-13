@@ -46,6 +46,7 @@ dependencies:
   animated_splash_screen: ^1.2.0
   #SharedPrefernce
   shared_preferences: ^2.0.13
+  get_storage: ^2.0.3
   #Cached Network Image
   cached_network_image: 
   #Carousel Slider

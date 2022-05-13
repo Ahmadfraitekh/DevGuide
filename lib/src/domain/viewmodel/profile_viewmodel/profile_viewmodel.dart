@@ -1,8 +1,10 @@
+import 'package:dev_guide/src/core/constants.dart';
 import 'package:dev_guide/src/core/helper/local_storage_data.dart';
 import 'package:dev_guide/src/domain/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileViewModel extends GetxController {
@@ -12,6 +14,14 @@ class ProfileViewModel extends GetxController {
   void onInit() {
     super.onInit();
     getCurrentUser();
+    _saveSwitchThemeStatus(isSwitched);
+  }
+
+  ProfileViewModel() {
+    if (_getSwitchThemeStatus()) {
+      isSwitched = _getSwitchThemeStatus();
+      update();
+    }
   }
 
   UserModel get userModel => _userModel;
@@ -20,7 +30,8 @@ class ProfileViewModel extends GetxController {
   ValueNotifier<bool> _notUser = ValueNotifier(false);
   late UserModel _userModel;
   var isLoading = false.obs;
-  var isDark = false.obs;
+  var isSwitched = false;
+  final _storage = GetStorage();
 
   Future<void> signOut() async {
     GoogleSignIn().signOut();
@@ -44,24 +55,17 @@ class ProfileViewModel extends GetxController {
     isLoading.value = false;
   }
 
-  // void getTheme() async {
-  //   //isDark = true.obs;
-  //   await localStorageData.getTheme;
-  //   //isDark = false.obs;
-  // }
+  // Save isDarkMode to local storage
+  _saveSwitchThemeStatus(bool isSwitch) =>
+      _storage.write(Constants.SWITCH_KEY, isSwitch);
 
-  // void saveTheme() async {
-  //   await localStorageData.saveTheme;
-  // }
+  // Load isDarkMode from local storage and if it's empty, return false (that means default theme is light)
+  bool _getSwitchThemeStatus() =>
+      _storage.read<bool>(Constants.SWITCH_KEY) ?? false;
 
-  void changeTheme(isDarkStatus) {
-    if (isDarkStatus == true) {
-      isDark = true.obs;
-      Get.changeThemeMode(ThemeMode.dark);
-    } else {
-      isDark = false.obs;
-      Get.changeThemeMode(ThemeMode.light);
-    }
-    localStorageData.saveTheme;
+  isSwitchedThemeState(var value) {
+    isSwitched = value;
+    _saveSwitchThemeStatus(isSwitched);
+    update();
   }
 }

@@ -40,4 +40,5 @@ abstract class Constants {
 
   static const CACHED_USER_DATA = 'CACHED_USER_DATA';
   static const DARK_THEME_KEY = 'isDarkMode';
+  static const SWITCH_KEY = 'isSwitched';
 }

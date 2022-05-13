@@ -145,10 +145,10 @@ class Authentication extends GetxController {
     }
   }
 
-  void logOut() async {
-    await _auth.signOut();
-    Get.offNamedUntil(RoutesName.signin, (route) => false);
-  }
+  // void logOut() async {
+  //   await _auth.signOut();
+  //   Get.offNamedUntil(RoutesName.signin, (route) => false);
+  // }
 
   void saveUser(UserCredential user) async {
     UserModel userModel = UserModel(
