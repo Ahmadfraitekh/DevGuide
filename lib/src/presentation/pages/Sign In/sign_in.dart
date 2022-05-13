@@ -154,50 +154,50 @@ class SigninPage extends StatelessWidget {
                     const SizedBox(
                       height: AppSize.s20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: ColorManager.secondary),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(AppPadding.p14),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                FontAwesomeIcons.facebookF,
-                                color: ColorManager.secondary,
-                                size: AppSize.s20,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: AppSize.s20,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: ColorManager.secondary),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(AppPadding.p14),
-                            child: GestureDetector(
-                              onTap: () {
-                                Authentication.instance.signInWithGoogle();
-                              },
-                              child: Icon(
-                                FontAwesomeIcons.google,
-                                color: ColorManager.secondary,
-                                size: AppSize.s20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Container(
+                    //       decoration: BoxDecoration(
+                    //         shape: BoxShape.circle,
+                    //         border: Border.all(color: ColorManager.secondary),
+                    //       ),
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.all(AppPadding.p14),
+                    //         child: GestureDetector(
+                    //           onTap: () {},
+                    //           child: Icon(
+                    //             FontAwesomeIcons.facebookF,
+                    //             color: ColorManager.secondary,
+                    //             size: AppSize.s20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: AppSize.s20,
+                    //     ),
+                    //     Container(
+                    //       decoration: BoxDecoration(
+                    //         shape: BoxShape.circle,
+                    //         border: Border.all(color: ColorManager.secondary),
+                    //       ),
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.all(AppPadding.p14),
+                    //         child: GestureDetector(
+                    //           onTap: () {
+                    //             Authentication.instance.signInWithGoogle();
+                    //           },
+                    //           child: Icon(
+                    //             FontAwesomeIcons.google,
+                    //             color: ColorManager.secondary,
+                    //             size: AppSize.s20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: AppSize.s20,
                     ),
