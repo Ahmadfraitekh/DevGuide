@@ -62,7 +62,7 @@ class Routes {
         return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               CoursesPage(
-            subCategory: args["subCategory"],
+            subCategories: args["subCategory"],
           ),
         );
       case RoutesName.course:

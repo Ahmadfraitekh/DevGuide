@@ -6,6 +6,7 @@ import 'package:dev_guide/src/domain/viewmodel/main_viewmodel/main_viewmodel.dar
 import 'package:dev_guide/src/domain/viewmodel/profile_viewmodel/profile_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/slider_viewmodel/slider_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/splash_viewmodel/splash_viewmodel.dart';
+import 'package:dev_guide/src/domain/viewmodel/sub_category_viewmodel/sub_category_viewmodel.dart';
 import 'package:get/get.dart';
 
 class Binding extends Bindings {
@@ -16,6 +17,7 @@ class Binding extends Bindings {
     Get.lazyPut<SplashViewModel>(() => SplashViewModel());
     Get.put<SliderViewModel>(SliderViewModel());
     Get.put<CategoriesViewModel>(CategoriesViewModel());
+    Get.put<SubCategoriesViewModel>(SubCategoriesViewModel());
     Get.put<LocalStorageData>(LocalStorageData());
     Get.lazyPut<ProfileViewModel>(() => ProfileViewModel());
   }

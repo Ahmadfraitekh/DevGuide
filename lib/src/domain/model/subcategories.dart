@@ -1,35 +1,33 @@
-class CategoriesModel {
+class SubCategoriesModel {
+  String? catgId;
   String? id;
   String? name;
   String? image;
   String? state;
-  String? catgId;
 
-  CategoriesModel({this.id, this.name, this.image, this.state, this.catgId});
+  SubCategoriesModel({this.catgId, this.id, this.name, this.image, this.state});
 
-  CategoriesModel.fromJson(Map<dynamic, dynamic> map) {
+  SubCategoriesModel.fromJson(Map<dynamic, dynamic> map) {
     // ignore: unnecessary_null_comparison
     if (map == null) {
       return;
     }
 
+    catgId = map['catgId'];
     id = map['id'];
     name = map['name'];
     image = map['image'];
     state = map['state'];
-    catgId = map['catgId'];
   }
 
-  Map<String, dynamic> toJson(CategoriesModel object) {
+  Map<String, dynamic> toJson(SubCategoriesModel object) {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = object.id;
-
-    data['name'] = object.name;
-
-    data['image'] = object.image;
-    data['state'] = object.state;
 
     data['catgId'] = object.catgId;
+    data['id'] = object.id;
+    data['name'] = object.name;
+    data['image'] = object.image;
+    data['state'] = object.state;
 
     return data;
   }

@@ -1,4 +1,5 @@
 import 'package:dev_guide/src/core/routes_name.dart';
+import 'package:dev_guide/src/domain/model/subcategories.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/styles_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
@@ -7,8 +8,8 @@ import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
 
 class CoursesPage extends StatefulWidget {
-  const CoursesPage({Key? key, required this.subCategory}) : super(key: key);
-  final Map subCategory;
+  CoursesPage({Key? key, required this.subCategories}) : super(key: key);
+  final SubCategoriesModel subCategories;
 
   @override
   State<CoursesPage> createState() => _CoursesPageState();
@@ -73,7 +74,7 @@ class _CoursesPageState extends State<CoursesPage> {
               Padding(
                 padding: EdgeInsets.all(AppPadding.p12),
                 child: Text(
-                  widget.subCategory["name"],
+                  widget.subCategories.name!,
                   style: _theme.textTheme.labelMedium,
                 ),
               )
