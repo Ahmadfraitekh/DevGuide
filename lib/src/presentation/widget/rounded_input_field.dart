@@ -15,6 +15,7 @@ class RoundedInputField extends StatelessWidget {
   final IconData icon;
   final TextInputAction? textInputAction;
   final dynamic validator;
+  final ValueChanged<String>? onFieldSubmitted;
   final Function(String? val)? onSave;
   final ValueChanged<String>? onChange;
   final VoidCallback? onTap;
@@ -34,6 +35,7 @@ class RoundedInputField extends StatelessWidget {
     required this.controller,
     required this.icon,
     this.onSave,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -48,6 +50,7 @@ class RoundedInputField extends StatelessWidget {
           enabled: enabled,
           validator: validator,
           onSaved: onSave,
+          onFieldSubmitted: onFieldSubmitted,
           onTap: onTap,
           readOnly: onTap != null,
           maxLines: maxLines,

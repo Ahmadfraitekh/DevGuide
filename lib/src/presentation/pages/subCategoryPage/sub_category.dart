@@ -10,6 +10,7 @@ import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class SubCategroyPage extends StatelessWidget {
   SubCategroyPage({Key? key, required this.category}) : super(key: key);
 

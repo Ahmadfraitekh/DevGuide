@@ -1,11 +1,9 @@
-import 'package:dev_guide/src/domain/model/course.dart';
-import 'package:dev_guide/src/domain/viewmodel/course_viewmodel/course_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
 import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class FavoritePage extends StatelessWidget {
   FavoritePage({Key? key}) : super(key: key);
 

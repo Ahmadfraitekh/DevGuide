@@ -20,6 +20,7 @@ class CourseModel {
   });
 
   CourseModel.fromJson(Map<dynamic, dynamic> map) {
+    // ignore: unnecessary_null_comparison
     if (map == null) {
       return;
     }

@@ -1,7 +1,8 @@
-import 'package:dev_guide/src/core/helper/service/firestore_category.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dev_guide/src/core/helper/service/firestroe_course.dart';
 
 import 'package:dev_guide/src/domain/model/course.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class CourseViewModel extends GetxController {
@@ -12,9 +13,11 @@ class CourseViewModel extends GetxController {
   void onInit() {
     super.onInit();
     getCourse();
+    // getSearch();
   }
 
   List<CourseModel> get courseModel => _courseModel;
+  //dynamic get getSearch => _getSearch();
 
   getCourse() async {
     await FireStoreCourse().getCourseFromFirebase().then((value) {
@@ -26,5 +29,12 @@ class CourseViewModel extends GetxController {
 
       update();
     });
+  }
+
+  Future getSearch(String name) async {
+    CollectionReference _ref = FirebaseFirestore.instance.collection('courses');
+
+    var value = await _ref.where("name", isEqualTo: name).get();
+    return value;
   }
 }

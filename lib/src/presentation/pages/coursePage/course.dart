@@ -1,4 +1,5 @@
 import 'package:dev_guide/src/core/routes_name.dart';
+import 'package:dev_guide/src/domain/model/course.dart';
 import 'package:dev_guide/src/domain/viewmodel/course_details_viewmodel/course_details_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
@@ -9,7 +10,7 @@ import 'package:get/get.dart';
 
 class CoursePage extends StatefulWidget {
   const CoursePage({Key? key, required this.courses}) : super(key: key);
-  final Map courses;
+  final CourseModel courses;
 
   @override
   State<CoursePage> createState() => _CoursePageState();
@@ -43,7 +44,7 @@ class _CoursePageState extends State<CoursePage>
                   Padding(
                     padding: EdgeInsets.all(AppPadding.p12),
                     child: Text(
-                      widget.courses["name"],
+                      widget.courses.name!,
                       style: _theme.textTheme.labelMedium,
                     ),
                   ),
@@ -75,7 +76,7 @@ class _CoursePageState extends State<CoursePage>
                 right: AppMargin.m20,
               ),
               child: ImageView(
-                url: widget.courses["image"],
+                url: widget.courses.image,
                 height: AppSize.s140,
                 width: _width,
               ),
@@ -111,7 +112,7 @@ class _CoursePageState extends State<CoursePage>
           Padding(
             padding: EdgeInsets.all(AppPadding.p8),
             child: Text(
-              widget.courses["desc"],
+              widget.courses.desc!,
               style: _theme.textTheme.caption,
             ),
           ),
@@ -122,7 +123,7 @@ class _CoursePageState extends State<CoursePage>
   }
 
   Widget _courses() {
-    List courses = widget.courses["courses"];
+    List courses = widget.courses.courses!;
 
     return GetBuilder<CourseDetailsViewModel>(
       init: CourseDetailsViewModel(),
