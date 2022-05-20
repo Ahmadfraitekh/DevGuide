@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dev_guide/src/core/helper/service/firestroe_course.dart';
 
 import 'package:dev_guide/src/domain/model/course.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class CourseViewModel extends GetxController {
