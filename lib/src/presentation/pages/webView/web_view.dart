@@ -19,9 +19,11 @@ class WebLinkView extends StatelessWidget {
               child: BackIcon(),
             ),
             Expanded(
-                child: WebView(
-              initialUrl: link,
-            ))
+              child: WebView(
+                initialUrl: link,
+                javascriptMode: JavascriptMode.unrestricted,
+              ),
+            ),
           ],
         ),
       ),
