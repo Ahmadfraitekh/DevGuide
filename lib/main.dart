@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       darkTheme: getDarkTheme(),
       themeMode: ThemeViewModel().theme,
       translations: Translation(),
-      locale: Locale('en'),
+      locale: Locale('ar'),
       fallbackLocale: Locale('ar'),
       initialRoute: '/',
       onGenerateRoute: Routes.generateRoute,

@@ -33,127 +33,127 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: AppSize.s20,
           ),
-          warningText(),
-          _videoShow(),
-          // _course(),
-          // Divider(
-          //   indent: 10.0,
-          //   endIndent: 10.0,
-          //   color: ColorManager.secondary,
-          // ),
-          //_mostRecently(),
-          // Divider(
-          //   indent: 10.0,
-          //   endIndent: 10.0,
-          //   color: ColorManager.secondary,
-          // ),
-          //_popular(),
+          //warningText(),
+          //_videoShow(),
+          _course(),
+          Divider(
+            indent: 10.0,
+            endIndent: 10.0,
+            color: ColorManager.secondary,
+          ),
+          _mostRecently(),
+          Divider(
+            indent: 10.0,
+            endIndent: 10.0,
+            color: ColorManager.secondary,
+          ),
+          _popular(),
         ],
       ),
     );
   }
 
-  // Widget _course() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p12),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'courses'.tr,
-  //           style: _theme.textTheme.headline3,
-  //         ),
-  //         const SizedBox(
-  //           height: AppSize.s4,
-  //         ),
-  //         SizedBox(
-  //           height: AppSize.s90,
-  //           child: ListView.builder(
-  //             itemBuilder: (context, index) => _imageView(
-  //               'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
-  //             ),
-  //             itemCount: 5,
-  //             scrollDirection: Axis.horizontal,
-  //             shrinkWrap: true,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _course() {
+    return Padding(
+      padding: const EdgeInsets.all(AppPadding.p12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'courses'.tr,
+            style: _theme.textTheme.headline3,
+          ),
+          const SizedBox(
+            height: AppSize.s4,
+          ),
+          SizedBox(
+            height: AppSize.s90,
+            child: ListView.builder(
+              itemBuilder: (context, index) => _imageView(
+                'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+              ),
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  // Widget _mostRecently() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p12),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'mostRecently'.tr,
-  //           style: _theme.textTheme.headline3,
-  //         ),
-  //         const SizedBox(
-  //           height: AppSize.s4,
-  //         ),
-  //         SizedBox(
-  //           height: AppSize.s90,
-  //           child: ListView.builder(
-  //             itemBuilder: (context, index) => _imageView(
-  //               'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
-  //             ),
-  //             itemCount: 5,
-  //             scrollDirection: Axis.horizontal,
-  //             shrinkWrap: true,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _mostRecently() {
+    return Padding(
+      padding: const EdgeInsets.all(AppPadding.p12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'mostRecently'.tr,
+            style: _theme.textTheme.headline3,
+          ),
+          const SizedBox(
+            height: AppSize.s4,
+          ),
+          SizedBox(
+            height: AppSize.s90,
+            child: ListView.builder(
+              itemBuilder: (context, index) => _imageView(
+                'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+              ),
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  // Widget _popular() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p12),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'popular'.tr,
-  //           style: _theme.textTheme.headline3,
-  //         ),
-  //         const SizedBox(
-  //           height: AppSize.s4,
-  //         ),
-  //         SizedBox(
-  //           height: AppSize.s90,
-  //           child: ListView.builder(
-  //             itemBuilder: (context, index) => _imageView(
-  //               'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
-  //             ),
-  //             itemCount: 5,
-  //             scrollDirection: Axis.horizontal,
-  //             shrinkWrap: true,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _popular() {
+    return Padding(
+      padding: const EdgeInsets.all(AppPadding.p12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'popular'.tr,
+            style: _theme.textTheme.headline3,
+          ),
+          const SizedBox(
+            height: AppSize.s4,
+          ),
+          SizedBox(
+            height: AppSize.s90,
+            child: ListView.builder(
+              itemBuilder: (context, index) => _imageView(
+                'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+              ),
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  // Widget _imageView(String url) {
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(15),
-  //     ),
-  //     padding: const EdgeInsets.all(
-  //       AppPadding.p8,
-  //     ),
-  //     child: ImageView(
-  //       url: url,
-  //       width: AppSize.s130,
-  //     ),
-  //   );
-  // }
+  Widget _imageView(String url) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      padding: const EdgeInsets.all(
+        AppPadding.p8,
+      ),
+      child: ImageView(
+        url: url,
+        width: AppSize.s130,
+      ),
+    );
+  }
 
   Widget warningText() {
     return Padding(
@@ -192,18 +192,18 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _videoShow() {
-    return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
-      builder: (ctr) => Padding(
-        padding: const EdgeInsets.all(AppPadding.p14),
-        child: YoutubePlayer(
-          controller: ctr.ytController,
-          showVideoProgressIndicator: true,
-        ),
-      ),
-    );
-  }
+  // Widget _videoShow() {
+  //   return GetBuilder<HomeViewModel>(
+  //     init: HomeViewModel(),
+  //     builder: (ctr) => Padding(
+  //       padding: const EdgeInsets.all(AppPadding.p14),
+  //       child: YoutubePlayer(
+  //         controller: ctr.ytController,
+  //         showVideoProgressIndicator: true,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _slider() {
     return Column(
