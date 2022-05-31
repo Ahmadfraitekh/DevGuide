@@ -4,6 +4,7 @@ import 'package:dev_guide/src/domain/viewmodel/auth_viewmodel/authentication.dar
 import 'package:dev_guide/src/domain/viewmodel/category_viewmodel/categories_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/course_details_viewmodel/course_details_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/course_viewmodel/course_viewmodel.dart';
+import 'package:dev_guide/src/domain/viewmodel/home_viewmodel/home_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/main_viewmodel/main_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/profile_viewmodel/profile_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/slider_viewmodel/slider_viewmodel.dart';
@@ -16,6 +17,7 @@ class Binding extends Bindings {
   void dependencies() {
     Get.lazyPut<Authentication>(() => Authentication());
     Get.put<MainViewModel>(MainViewModel());
+    Get.put<HomeViewModel>(HomeViewModel());
     Get.lazyPut<SplashViewModel>(() => SplashViewModel());
     Get.put<SliderViewModel>(SliderViewModel());
     Get.put<CategoriesViewModel>(CategoriesViewModel());

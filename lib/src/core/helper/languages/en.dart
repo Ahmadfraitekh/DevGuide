@@ -33,4 +33,5 @@ const Map<String, String> en = {
   "privacyPolicy":
       "By continuing, you agree to accept our\n Privacy Policy and Terms of Service.",
   "back": "Back",
+  "warningText": "Please watch this video before starting any course"
 };

@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dev_guide/src/domain/viewmodel/home_viewmodel/home_viewmodel.dart';
 import 'package:dev_guide/src/domain/viewmodel/slider_viewmodel/slider_viewmodel.dart';
 import 'package:dev_guide/src/presentation/resources/color_manager.dart';
 import 'package:dev_guide/src/presentation/resources/values_manager.dart';
@@ -6,6 +7,7 @@ import 'package:dev_guide/src/presentation/widget/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -14,7 +16,6 @@ class HomePage extends StatelessWidget {
   // ignore: unused_field
   late double _width;
   late ThemeData _theme;
-
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
@@ -32,122 +33,174 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: AppSize.s20,
           ),
-          _course(),
-          Divider(
-            indent: 10.0,
-            endIndent: 10.0,
-            color: ColorManager.secondary,
-          ),
-          _mostRecently(),
-          Divider(
-            indent: 10.0,
-            endIndent: 10.0,
-            color: ColorManager.secondary,
-          ),
-          _popular(),
+          warningText(),
+          _videoShow(),
+          // _course(),
+          // Divider(
+          //   indent: 10.0,
+          //   endIndent: 10.0,
+          //   color: ColorManager.secondary,
+          // ),
+          //_mostRecently(),
+          // Divider(
+          //   indent: 10.0,
+          //   endIndent: 10.0,
+          //   color: ColorManager.secondary,
+          // ),
+          //_popular(),
         ],
       ),
     );
   }
 
-  Widget _course() {
+  // Widget _course() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(AppPadding.p12),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'courses'.tr,
+  //           style: _theme.textTheme.headline3,
+  //         ),
+  //         const SizedBox(
+  //           height: AppSize.s4,
+  //         ),
+  //         SizedBox(
+  //           height: AppSize.s90,
+  //           child: ListView.builder(
+  //             itemBuilder: (context, index) => _imageView(
+  //               'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+  //             ),
+  //             itemCount: 5,
+  //             scrollDirection: Axis.horizontal,
+  //             shrinkWrap: true,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _mostRecently() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(AppPadding.p12),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'mostRecently'.tr,
+  //           style: _theme.textTheme.headline3,
+  //         ),
+  //         const SizedBox(
+  //           height: AppSize.s4,
+  //         ),
+  //         SizedBox(
+  //           height: AppSize.s90,
+  //           child: ListView.builder(
+  //             itemBuilder: (context, index) => _imageView(
+  //               'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+  //             ),
+  //             itemCount: 5,
+  //             scrollDirection: Axis.horizontal,
+  //             shrinkWrap: true,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _popular() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(AppPadding.p12),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'popular'.tr,
+  //           style: _theme.textTheme.headline3,
+  //         ),
+  //         const SizedBox(
+  //           height: AppSize.s4,
+  //         ),
+  //         SizedBox(
+  //           height: AppSize.s90,
+  //           child: ListView.builder(
+  //             itemBuilder: (context, index) => _imageView(
+  //               'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+  //             ),
+  //             itemCount: 5,
+  //             scrollDirection: Axis.horizontal,
+  //             shrinkWrap: true,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _imageView(String url) {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(15),
+  //     ),
+  //     padding: const EdgeInsets.all(
+  //       AppPadding.p8,
+  //     ),
+  //     child: ImageView(
+  //       url: url,
+  //       width: AppSize.s130,
+  //     ),
+  //   );
+  // }
+
+  Widget warningText() {
     return Padding(
-      padding: const EdgeInsets.all(AppPadding.p12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'courses'.tr,
-            style: _theme.textTheme.headline3,
-          ),
-          const SizedBox(
-            height: AppSize.s4,
-          ),
-          SizedBox(
-            height: AppSize.s90,
-            child: ListView.builder(
-              itemBuilder: (context, index) => _imageView(
-                'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
+      padding: const EdgeInsets.only(
+        bottom: AppPadding.p12,
+        right: AppPadding.p12,
+        left: AppPadding.p12,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorManager.background,
+          borderRadius: BorderRadius.circular(AppSize.s14),
+        ),
+        width: double.infinity,
+        height: AppSize.s40,
+        child: Padding(
+          padding: const EdgeInsets.all(AppPadding.p8),
+          child: Row(
+            children: [
+              Icon(
+                Icons.warning,
+                size: AppSize.s16,
+                color: ColorManager.primary,
               ),
-              itemCount: 5,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-            ),
+              SizedBox(
+                width: AppSize.s8,
+              ),
+              Text(
+                'warningText'.tr,
+                style: _theme.textTheme.bodySmall,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _mostRecently() {
-    return Padding(
-      padding: const EdgeInsets.all(AppPadding.p12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'mostRecently'.tr,
-            style: _theme.textTheme.headline3,
-          ),
-          const SizedBox(
-            height: AppSize.s4,
-          ),
-          SizedBox(
-            height: AppSize.s90,
-            child: ListView.builder(
-              itemBuilder: (context, index) => _imageView(
-                'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
-              ),
-              itemCount: 5,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _popular() {
-    return Padding(
-      padding: const EdgeInsets.all(AppPadding.p12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'popular'.tr,
-            style: _theme.textTheme.headline3,
-          ),
-          const SizedBox(
-            height: AppSize.s4,
-          ),
-          SizedBox(
-            height: AppSize.s90,
-            child: ListView.builder(
-              itemBuilder: (context, index) => _imageView(
-                'https://www.filepicker.io/api/file/sXz6u6kMQzK9uXkCwtPv',
-              ),
-              itemCount: 5,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _imageView(String url) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      padding: const EdgeInsets.all(
-        AppPadding.p8,
-      ),
-      child: ImageView(
-        url: url,
-        width: AppSize.s130,
+  Widget _videoShow() {
+    return GetBuilder<HomeViewModel>(
+      init: HomeViewModel(),
+      builder: (ctr) => Padding(
+        padding: const EdgeInsets.all(AppPadding.p14),
+        child: YoutubePlayer(
+          controller: ctr.ytController,
+          showVideoProgressIndicator: true,
+        ),
       ),
     );
   }
