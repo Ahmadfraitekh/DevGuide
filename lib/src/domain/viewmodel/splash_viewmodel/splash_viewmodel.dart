@@ -21,13 +21,16 @@ class SplashViewModel extends GetxController
     // Checked if the user is logged in or not
     // if the user is already is logged in the application will take him/her to the main page dirctly
     // if not it will take him/her to the login page
-    localStorageData.getUser.then((value) {
-      if (value?.userId == null) {
-        Get.offNamedUntil(RoutesName.signin, (route) => false);
-      } else {
-        return Get.offNamedUntil(RoutesName.mainPage, (route) => false);
-      }
-    });
+    if (localStorageData != null) {
+      localStorageData.getUser!.then((value) {
+        if (value?.userId == null) {
+          Get.offNamedUntil(RoutesName.signin, (route) => false);
+        } else {
+          return Get.offNamedUntil(RoutesName.mainPage, (route) => false);
+        }
+      });
+    }
+    return Get.offNamedUntil(RoutesName.mainPage, (route) => false);
   }
 
   @override

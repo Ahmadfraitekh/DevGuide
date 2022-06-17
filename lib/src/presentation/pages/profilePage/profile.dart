@@ -21,7 +21,7 @@ class ProfilePage extends StatelessWidget {
     return GetBuilder<ProfileViewModel>(
         init: ProfileViewModel(),
         builder: (ctr) => Scaffold(
-              body: ctr.notUser.value
+              body: ctr.userModel == null
                   ? Center(
                       child: Container(
                         height: 400.0,
@@ -120,57 +120,59 @@ class ProfilePage extends StatelessWidget {
       init: ProfileViewModel(),
       builder: (ctr) => Card(
         elevation: 0.0,
-        child: Column(
-          children: [
-            CircleAvatar(
-              backgroundColor: ColorManager.secondary,
-              child: CircleAvatar(
-                child: Icon(
-                  FontAwesomeIcons.solidUser,
-                  color: ColorManager.secondary,
-                  size: AppSize.s65,
-                ),
-                backgroundColor: ColorManager.white,
-                radius: 59.0,
-              ),
-              radius: 60.0,
-            ),
-            const SizedBox(
-              height: AppSize.s14,
-            ),
-            Text(
-              ctr.userModel.fullName!,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-                color: ColorManager.primary,
-              ),
-            ),
-            const SizedBox(
-              height: AppSize.s8,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.email_outlined,
-                  size: 21.0,
-                ),
-                const SizedBox(
-                  width: AppSize.s8,
-                ),
-                Text(
-                  ctr.userModel.email!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                    color: ColorManager.primary,
+        child: ctr.userModel == null
+            ? Text("")
+            : Column(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: ColorManager.secondary,
+                    child: CircleAvatar(
+                      child: Icon(
+                        FontAwesomeIcons.solidUser,
+                        color: ColorManager.secondary,
+                        size: AppSize.s65,
+                      ),
+                      backgroundColor: ColorManager.white,
+                      radius: 59.0,
+                    ),
+                    radius: 60.0,
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
+                  const SizedBox(
+                    height: AppSize.s14,
+                  ),
+                  Text(
+                    ctr.userModel!.fullName!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: ColorManager.primary,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.s8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.email_outlined,
+                        size: 21.0,
+                      ),
+                      const SizedBox(
+                        width: AppSize.s8,
+                      ),
+                      Text(
+                        ctr.userModel!.email!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                          color: ColorManager.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
       ),
     );
   }

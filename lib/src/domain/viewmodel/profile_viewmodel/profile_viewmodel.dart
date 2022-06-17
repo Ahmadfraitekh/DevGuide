@@ -25,11 +25,11 @@ class ProfileViewModel extends GetxController {
     }
   }
 
-  UserModel get userModel => _userModel;
+  UserModel? get userModel => _userModel;
   ValueNotifier<bool> get notUser => _notUser;
 
   ValueNotifier<bool> _notUser = ValueNotifier(false);
-  late UserModel _userModel;
+  UserModel? _userModel;
   var isLoading = false.obs;
   var isSwitched = false;
   final _storage = GetStorage();
@@ -43,9 +43,14 @@ class ProfileViewModel extends GetxController {
 
   void getCurrentUser() async {
     _notUser.value = true;
-    await localStorageData.getUser.then((value) {
-      _userModel = value!;
-    });
+    if (localStorageData.getUser != null) {
+      await localStorageData.getUser!.then((value) {
+        _userModel = value;
+      });
+    } else {
+      _userModel = null;
+    }
+
     _notUser.value = false;
     update();
   }

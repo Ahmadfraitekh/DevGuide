@@ -12,7 +12,7 @@ class LocalStorageData extends GetxController {
 
   // Save User Data
 
-  Future<UserModel?> get getUser async {
+  Future<UserModel?>? get getUser async {
     try {
       UserModel userModel = await _getUserData();
       // ignore: unnecessary_null_comparison
